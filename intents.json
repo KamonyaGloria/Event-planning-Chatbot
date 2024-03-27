@@ -1,0 +1,824 @@
+{"intents": [
+  {"tag": "greeting",
+   "patterns": ["Hey, buddy how are you", "Hey", "Is anyone there?","Hi there", "Hello", "Hey there", "Howdy", "Hola", "Bonjour", "Konnichiwa", "Guten tag", "Ola"],
+   "responses": ["Hey, buddy how are you", "Hi there. What brings you here today?", "Hello there. Glad to see you're back. What's going on in your world right now?"]
+  },
+
+  {"tag": "morning",
+      "patterns": ["Good morning"],
+      "responses": ["Good morning. I hope you had a good night's sleep. How are you today? "]
+  },
+  {"tag": "afternoon",
+      "patterns": ["Good afternoon"],
+      "responses": ["Good afternoon. How is your day going?"]
+  },
+  {"tag": "evening",
+      "patterns": ["Good evening"],
+      "responses": ["Good evening. How has your day been?"]
+  },
+  {"tag": "night",
+      "patterns": ["Good night"],
+      "responses": ["Good night. Get some proper sleep", "Good night. Sweet dreams."]
+  },
+  {"tag": "goodbye",
+   "patterns": ["Bye", "See you later", "Goodbye", "Au revoir", "Sayonara", "ok bye", "Bye then", "Fare thee well"],
+   "responses": ["See you later.", "Have a nice day.", "Bye! Come back again.", "I'll see you soon."]
+  },
+  {"tag": "thanks",
+   "patterns": ["Thanks", "Thank you", "That's helpful", "Thanks for the help", "Than you very much"],
+   "responses": ["Happy to help!", "Any time!", "My pleasure", "You're most welcome!"]
+  },
+  {"tag": "Fallback",
+      "patterns": [""],
+      "responses": ["Sorry, I didn't understand you.", "Not sure I understand that."]
+  },
+  {"tag": "neutral-response",
+      "patterns": ["nothing much"],
+      "responses": ["Oh I see. Do you want to talk about something?"]
+  },
+  {"tag": "help",
+  "patterns": ["Can you help me with event planning?","I need assistance organizing an event","Help me understand the event planning process"],
+  "responses": ["Of course! I'm here to assist you with event planning. What do you need help with?","Sure, I can guide you through the event planning process. What specific assistance are you looking for?"]
+  },
+  {"tag": "plan",
+  "patterns":["I have an event to plan for and I would your assistance",
+  "No, I have not and I need your quick assistance",
+  "I am planning a birthday party for my daughter. Can you suggest some kid-friendly venues?",
+  "Organize a wedding reception","Set up a conference for next month"],
+  "responses":[ "I am here to guide you,Have you worked with an event planner before?",
+  "Absolutely! You can consider venue options like indoor play centers, trampoline park, your available local community centers, children’s museumsIf you prefer a more intimate center you can host the party at home and set up games and crafts."]
+  },
+  {"tag": "GetEventDetails",
+  "patterns":["Tell me more about the upcoming conference",
+  "Give me details about the wedding on June 15th",
+  "What's the agenda for the team-building event?"],
+  "responses":["Certainly! The upcoming conference is scheduled for [date]. The agenda includes [details].",
+  "The wedding on June 15th will take place at [venue]. The program includes [details]."]
+  },
+  {"tag": "UpdateEvent",
+  "patterns":[ "Change the venue for the party to downtown",
+  "Update the date of the meeting to next week",
+  "Modify the catering for the event"],
+  "responses":["Got it! What specific changes would you like to make to the event?",
+  "Sure, let me know the updates you'd like to implement for the event."]
+  },
+  {"tag": "CancelEvent",
+  "patterns":["Cancel the workshop scheduled for Friday",
+  "I need to cancel the charity fundraiser",
+  "Abort the product launch event"],
+  "responses":[ "I understand. Please provide more details about the event you want to cancel.",
+  "Certainly. To proceed with the cancellation, could you provide the event details?"]
+  },
+  {"tag": "SearchVenues",
+  "patterns":[ "Find venues for a wedding in the city",
+  "Search for conference halls near me",
+  "Locate a suitable place for a baby shower"],
+  "responses":["Sure, I can help you find venues! What city or location are you looking for?",
+  "Great! Let's find the perfect venue. Can you specify the location or city for the event?"]
+  },
+  {"tag": "CheckAvailability",
+ "patterns":["Is the banquet hall available on June 1st?",
+ "Check if the rooftop garden is free next weekend","See if the conference room is available for booking"],
+ "responses":[ "I'll check the availability for you. Please provide the date and time you're looking for.",
+ "Sure, let me verify the availability. Could you share the date and time you have in mind?"]
+  },
+  {"tag": "GetBudgetEstimation",
+  "patterns":[ "Estimate the cost for a birthday party for 50 guests",
+  "How much would it cost to organize a company picnic?",
+  "Get a budget estimate for a charity event"],
+  "responses":["Certainly! To provide an accurate budget estimate, could you share more details about the event?",
+  "I can help with the budget estimate. Please provide information about the event size and specific requirements."]
+ },
+ {"tag":"organizing",
+ "patterns":[": Do you offer decoration services for a birthday party",
+ "what entertainment options do you recommend for a birthday party for adults?",
+ "Can you help me arrange transportation for my event guests?",
+ "What entertainment options do you propose for a corporate gala?"],
+ "responses":[": We have a variety of entertainment options available for adult birthday parties, including live bands, DJs, Karaoke and more. What type of entertainment are you interested in for a birthday celebration?",
+ ": Yes, let us discuss your preferred theme, color scheme and any decorations you have in mind",
+ "Can you help me arrange transportation for my event guests?",
+ "Absolutely! I would propose live bands or orchestra, DJ, illusionist, hiring a comedian, interactive performers, acrobats, virtual reality experiences, dancers, celebrity guest speakers and light shows. Which one would you prefer?"]
+ },
+ 
+    {
+      "tag": "GREETING",
+      "patterns": ["Hey, buddy how are you"],
+      "responses": ["Hey, friend I am fine, how can I help you/"]
+    },
+    {
+      "tag": "EVENT_PLANNING_INQUIRY",
+      "patterns": [
+        "I have an event to plan for and I would your assistance",
+        "Have you worked with an event planner before?"
+      ],
+      "responses": [
+        "I am here to guide you,",
+        "What do you need from me?"
+      ]
+    },
+    {
+      "tag": "BIRTHDAY_PARTY_PLANNING",
+      "patterns": [
+        "I am planning a birthday party for my daughter. Can you suggest some kid-friendly venues?",
+        "Do you have any birthday party ideas?",
+        "What entertainment options do you recommend for a birthday party for adults?"
+      ],
+      "responses": [
+        "Absolutely! You can consider venue options like indoor play centers, trampoline park, your available local community centers, children’s museums. If you prefer a more intimate center you can host the party at home and set up games and crafts.",
+        "Yes, let us discuss your preferred theme, color scheme and any decorations you have in mind",
+        "We have a variety of entertainment options available for adult birthday parties, including live bands, DJs, Karaoke and more."
+      ]
+    },
+    {
+      "tag": "TRANSPORTATION_ASSISTANCE",
+      "patterns": ["Can you help me arrange transportation for my event guests?"],
+      "responses": ["Certainly! All you need to know is the number of guests, pickup/drop off locations, any special transportation requirements and you are good to go"]
+    },
+    {
+      "tag": "CORPORATE_GALA_ENTERTAINMENT",
+      "patterns": ["What entertainment options do you propose for a corporate gala?"],
+      "responses": ["Absolutely! I would propose live bands or orchestra, DJ, illusionist, hiring a comedian, interactive performers, acrobats, virtual reality experiences, dancers, celebrity guest speakers and light shows. Which one would you prefer?"]
+    },
+    {
+      "tag": "TECH_CONFERENCE_PLANNING",
+      "patterns": ["I’m organizing a multi-day conference for a tech company with international attendees. Can you also assist with arranging accommodations options for our guests?"],
+      "responses": ["Absolutely for the conference venue, I recommend a hotel with spacious conference rooms and breakout areas. I’ll prioritize locations with easy access transportation and amenities. Regarding accommodation, I can arrange room blocks at nearby hotels, ensuring convenience for your international guests"]
+    },
+    {
+      "tag": "PRODUCT_LAUNCH_PLANNING",
+      "patterns": ["I’m planning for a product launch event for a new fashion brand. Can you also help with branding and promotional materials?"],
+      "responses": ["Certainly! I’ll scout venues that reflect your brand's aesthetic and accommodate your event layout needs, including runway space and product display areas. You can also collaborate with designers to create branded signage, backdrops and promotional materials that enhance your brand identity"]
+    },
+    {
+      "tag": "morning",
+      "patterns": ["Good morning"],
+      "responses": ["Good morning. I hope you had a good night's sleep. How are you today?"]
+    },
+    {
+      "tag": "virtual_event_platform",
+      "patterns": ["What platform should I use to host a virtual event?"],
+      "responses": ["Popular platforms for virtual events include Zoom, Microsoft Teams, Google Meet, and Hopin. Consider your specific needs such as audience size, interactivity, and budget when choosing a platform."]
+    },
+    {
+      "tag": "engage_attendees",
+      "patterns": ["How can I keep attendees engaged during a virtual event?"],
+      "responses": ["Offer interactive elements such as live polls, Q&A sessions, breakout rooms, and virtual networking opportunities. Incorporating engaging speakers, entertainment, and interactive activities can also help maintain attendee interest."]
+    },
+    {
+      "tag": "equipment_needed",
+      "patterns": ["What equipment do I need to host a successful virtual event?"],
+      "responses": ["At minimum, you'll need a reliable internet connection, a webcam, microphone, and headphones. Depending on the complexity of your event, you may also consider investing in lighting equipment, green screens, or additional audiovisual tools."]
+    },
+    {
+      "tag": "promote_event",
+      "patterns": ["How can I promote my virtual event effectively?"],
+      "responses": ["Utilize social media, email marketing, and targeted advertising to reach your audience. Create engaging promotional content, such as teaser videos or graphics, and leverage partnerships with influencers or industry organizations to increase visibility."]
+    },
+    {
+      "tag": "registration_best_practices",
+      "patterns": ["What are some best practices for managing registrations for a virtual event?"],
+      "responses": ["Use an online registration platform to streamline the registration process and collect attendee information. Provide clear instructions for accessing the event, including any required links or passwords, and send reminders leading up to the event to maximize attendance."]
+    },
+    {
+      "tag": "smooth_technical_execution",
+      "patterns": ["How can I ensure the technical aspects of my virtual event run smoothly?"],
+      "responses": ["Conduct thorough testing of your chosen platform and equipment prior to the event to identify and address any technical issues. Have a backup plan in place in case of technical difficulties, and designate a tech support team to assist attendees during the event."]
+    },
+    {
+      "tag": "creative_event_themes",
+      "patterns": ["What are some creative ideas for virtual event themes?"],
+      "responses": ["Consider themes that align with your event's purpose or audience interests, such as a virtual travel experience, retro game night, or virtual scavenger hunt. Incorporate themed backgrounds, activities, and interactive elements to enhance the virtual experience."]
+    },
+    {
+      "tag": "budgeting",
+      "patterns": [
+        "What are some cost-effective venues for hosting a small event?",
+        "How can I estimate the total cost of catering for my event?",
+        "I need to rent audiovisual equipment for my event. How can I budget for this?",
+        "What are some ways to save money on decorations for my event?",
+        "I'm looking for entertainment options for my event within a limited budget. Any suggestions?",
+        "How can I negotiate better prices with vendors for my event?",
+        "What are some unexpected expenses I should budget for when planning an event?"
+      ],
+      "responses": [
+        "Consider community centers, local parks, or renting out a small space in a restaurant for a budget-friendly venue option.",
+        "To estimate catering costs, consider the number of guests, type of menu (buffet, plated), and any dietary restrictions. You can request quotes from multiple caterers to compare prices.",
+        "Research rental companies in your area and request quotes based on your specific needs, such as microphones, projectors, and screens. Factor in delivery, setup, and any additional fees when budgeting.",
+        "Consider DIY decorations using inexpensive materials like paper, fabric, or balloons. You can also repurpose items you already own or borrow decorations from friends or family to cut costs.",
+        "Explore local talent such as musicians, dancers, or comedians who may offer affordable rates for performances. You can also create your own playlist and use a sound system for background music.",
+        "Research average prices for the services you need and be prepared to negotiate based on your budget and specific requirements. Consider bundling services or asking for discounts for early payment to lower costs.",
+        "Don't forget to budget for items like insurance, permits, taxes, and gratuities, which can often be overlooked but add up quickly. It's also wise to set aside a contingency fund for any unforeseen circumstances."
+      ]
+    },
+    {
+      "tag": "virtual_event",
+      "patterns": [
+        "What platform should I use to host a virtual event?",
+        "How can I keep attendees engaged during a virtual event?",
+        "What equipment do I need to host a successful virtual event?",
+        "How can I promote my virtual event effectively?",
+        "What are some best practices for managing registrations for a virtual event?",
+        "How can I ensure the technical aspects of my virtual event run smoothly?",
+        "What are some creative ideas for virtual event themes?"
+      ],
+      "responses": [
+        "Popular platforms for virtual events include Zoom, Microsoft Teams, Google Meet, and Hopin. Consider your specific needs such as audience size, interactivity, and budget when choosing a platform.",
+        "Offer interactive elements such as live polls, Q&A sessions, breakout rooms, and virtual networking opportunities. Incorporating engaging speakers, entertainment, and interactive activities can also help maintain attendee interest.",
+        "At minimum, you'll need a reliable internet connection, a webcam, microphone, and headphones. Depending on the complexity of your event, you may also consider investing in lighting equipment, green screens, or additional audiovisual tools.",
+        "Utilize social media, email marketing, and targeted advertising to reach your audience. Create engaging promotional content, such as teaser videos or graphics, and leverage partnerships with influencers or industry organizations to increase visibility.",
+        "Use an online registration platform to streamline the registration process and collect attendee information. Provide clear instructions for accessing the event, including any required links or passwords, and send reminders leading up to the event to maximize attendance.",
+        "Conduct thorough testing of your chosen platform and equipment prior to the event to identify and address any technical issues. Have a backup plan in place in case of technical difficulties, and designate a tech support team to assist attendees during the event.",
+        "Consider themes that align with your event's purpose or audience interests, such as a virtual travel experience, retro game night, or virtual scavenger hunt. Incorporate themed backgrounds, activities, and interactive elements to enhance the virtual experience."
+      ]
+    },
+    {
+      "tag": "plan_event",
+      "patterns": [
+        "I want to plan an event",
+        "I'm thinking of organizing an event",
+        "How can I plan an event?",
+        "I need help with event planning",
+        "Can you assist me in organizing an event?"
+      ],
+      "responses": [
+        "Of course! I'd be happy to help you plan your event. What type of event are you thinking of? (e.g., birthday, wedding, corporate event)"
+      ]
+    },
+    
+    {
+      "tag": "event_type",
+      "patterns": [
+        "I'm planning a birthday party",
+        "I want to organize a wedding",
+        "I'm thinking of a corporate event",
+        "I'm considering a graduation party",
+        "I need help with my anniversary celebration"
+      ],
+      "responses": [
+        "Great choice! Each type of event has its unique requirements. What specific details would you like to discuss for your event?"
+      ]
+    },
+    {
+      "tag": "event_details",
+      "patterns": [
+        "I need help with venue selection",
+        "What are some venue options?",
+        "Do you have suggestions for catering services?",
+        "I'm looking for entertainment ideas",
+        "Can you recommend a photographer?"
+      ],
+      "responses": [
+        "Sure, we can discuss venue options, catering services, entertainment ideas, photography, and more. What aspect of your event would you like to focus on first?"
+      ]
+    },
+    {
+      "tag": "event_conclusion",
+      "patterns": [
+        "Thank you for your assistance",
+        "I have all the information I need now",
+        "You've been very helpful, thanks!"
+      ],
+      "responses": [
+        "You're welcome! If you have any more questions or need further assistance, feel free to ask. Best of luck with your event planning!"
+      ]
+    },
+    {
+      "tag": "ticketing",
+      "patterns": [
+        "How can I set ticket prices for my event?",
+        "What ticketing platform should I use for selling event tickets?",
+        "How can I incentivize early ticket sales for my event?",
+        "What are some best practices for promoting ticket sales for my event?",
+        "How can I prevent ticket scalping or unauthorized reselling of tickets for my event?",
+        "What should I include in the ticketing terms and conditions for my event?",
+        "How can I track ticket sales and attendance for my event?"
+      ],
+      "responses": [
+        "Consider factors such as the event's location, duration, type, and target audience demographics when determining ticket prices. Research similar events in your area and take into account any additional costs such as venue rental and catering.",
+        "Popular ticketing platforms include Eventbrite, Ticketmaster, and Brown Paper Tickets. Compare features such as ticket fees, customization options, and integration capabilities with your event website or social media channels before choosing a platform.",
+        "Offer early bird discounts or exclusive perks such as VIP access, priority seating, or discounted merchandise for attendees who purchase tickets in advance. Promote limited-time offers and create a sense of urgency to encourage early ticket sales.",
+        "Utilize multiple marketing channels such as social media, email newsletters, and targeted advertising to reach your target audience. Create engaging promotional content, highlight key event features, and offer incentives such as early bird discounts or group rates to drive ticket sales.",
+        "Implement measures such as unique ticket barcodes, ticket limits per purchase, and ID verification requirements to deter scalping and unauthorized resale. Regularly monitor ticket sales and enforce terms and conditions to ensure compliance.",
+        "Include important details such as refund and cancellation policies, event entry requirements, prohibited items, and liability disclaimers in the ticketing terms and conditions. Clearly communicate any restrictions or conditions to attendees to avoid misunderstandings.",
+        "Use the reporting and analytics features provided by your ticketing platform to track ticket sales, monitor attendance, and gather valuable insights into attendee demographics and behavior. Regularly review sales data to identify trends and adjust your marketing strategy accordingly."
+      ]
+    }, 
+        {
+          "tag": "themes",
+          "patterns": [
+            "Hey, I'm looking for ideas for a unique event theme.",
+            "Can you help me come up with a creative theme for a party?",
+            "I want to organize an event with a special theme. Any suggestions?",
+            "Tell me about some fun and unusual event themes.",
+            "What are some unique themes for a celebration?"
+          ],
+          "responses": [
+            "Absolutely! I'd love to help you brainstorm some unique event themes.",
+            "Sure thing! Let's explore some creative and fun event theme ideas.",
+            "Of course! Planning a themed event can be so exciting. What type of event are you thinking about?",
+            "Great! Let's get creative with some unique event themes.",
+            "Certainly! I'm here to help you come up with a memorable and exciting event theme."
+          ]
+        },
+        {
+          "tag": "white_and_gold_theme",
+          "patterns": [
+            "Hey, I'm planning an event with a white and gold theme. Can you help me with some ideas?",
+            "It's a birthday party for my best friend. We want it to be glamorous and sophisticated.",
+            "Any suggestions for the dress code?",
+            "I need help with the menu. What kind of food and drinks should I serve?",
+            "Any suggestions for party favors that go with the theme?",
+            "What are some other unique event themes?"
+          ],
+          "responses": [
+            "Absolutely! I'd be thrilled to help you plan your white and gold event. What kind of event is it?",
+            "That sounds amazing! For decorations, you could use white and gold balloons, elegant tablecloths, and shimmering gold centerpieces. How about a white and gold backdrop for a photo booth?",
+            "For a glamorous touch, you could suggest that guests dress in white and gold attire. It'll add to the overall ambiance and make everyone feel like they're part of the theme.",
+            "How about a DIY cocktail station where guests can create their own white and gold-themed drinks? You could also have a dance floor with a DJ playing all the latest hits to keep the party going.",
+            "For food, you could have a mix of elegant appetizers like mini quiches and shrimp cocktail. As for drinks, you can offer a signature white and gold cocktail, champagne, and a selection of white and red wines.",
+            "How about personalized white and gold keychains or mini bottles of gold glitter nail polish? They'll make for great keepsakes and tie in perfectly with the theme."
+          ]
+        },
+        {
+          "tag": "unique_themes",
+          "patterns": [
+            "What about themes used for a graduation ceremony?",
+            "Can you suggest some unique event themes?",
+            "Give me ideas for themes that stand out.",
+            "Any recommendations for creative event themes?",
+            "Tell me about unconventional event themes."
+          ],
+          "responses": [
+            "Graduation ceremonies often have a classic and formal feel, but you can still add a touch of creativity to make it memorable. Here are a few graduation ceremony theme ideas: 1. 'Adventure Awaits': Inspire graduates to embark on their next journey with a theme centered around adventure. Decorate the venue with travel-inspired elements like globes, maps, and suitcases. 2. 'Hollywood Stars': Roll out the red carpet and give your graduates the star treatment with a Hollywood-themed graduation. Use a paparazzi backdrop, a 'Walk of Fame' with personalized stars, and even a mini awards ceremony. 3. 'Futuristic Achievers': Embrace the future by creating a futuristic-themed graduation. Incorporate sleek, modern decor, LED lights, and technology-inspired elements to symbolize the graduates' potential. 4. 'Garden of Success': Celebrate growth and achievement with a garden-themed graduation. Use floral decorations, greenery, and vibrant colors to create a fresh and uplifting atmosphere. 5. 'School of Magic': Add a touch of enchantment to the graduation ceremony with a magical theme. Incorporate elements from popular fantasy stories, like floating candles, wizard hats, and a sorting ceremony. Remember, the theme should complement the significance of the graduation ceremony while reflecting the personality and aspirations of the graduates. Congrats to all the graduates!",
+           "Sure thing! Here are a few more unique event themes for you to consider: 1. Enchanted Forest: Transform your venue into a magical woodland with lush greenery, twinkling lights, and whimsical decor. Think fairies, woodland creatures, and a touch of fantasy. 2. Retro Arcade: Take your guests back in time with a retro arcade-themed event. Set up vintage arcade games, neon lights, and nostalgic decorations for a fun and nostalgic atmosphere. 3. Masquerade Ball: Create an air of mystery and elegance with a masquerade ball theme. Encourage guests to wear masks and dress in their finest attire for a night of intrigue and glamour. 4. Around the World: Celebrate the diversity of cultures by creating an 'Around the World' event. Each area of the venue can represent a different country, showcasing its unique traditions, cuisine, and music. 5. Galaxy Gala: Set your event in outer space with a galaxy-themed gala. Use cosmic decorations, glow-in-the-dark elements, and celestial projections to create an otherworldly atmosphere. Remember, the key to a unique event theme is to think creatively and make it an immersive experience for your guests. Have fun planning your next extraordinary event!",
+            "Congratulations to all the graduates! Here are some creative graduation ceremony themes:",
+            "Thinking outside the box can make your event truly special. Here are some unique event themes to consider:"
+          ]
+        },
+          
+{
+  "tag": "budgeting_tips",
+  "patterns": [
+  "What are some cost-effective venues for hosting a small event?",
+  "How can I estimate the total cost of catering for my event?",
+  "I need to rent audiovisual equipment for my event. How can I budget for this?",
+  "What are some ways to save money on decorations for my event?",
+  "I'm looking for entertainment options for my event within a limited budget. Any suggestions?",
+  "How can I negotiate better prices with vendors for my event?",
+  "What are some unexpected expenses I should budget for when planning an event?"
+  ],
+  "responses": [
+  "Consider community centers, local parks, or renting out a small space in a restaurant for a budget-friendly venue option.",
+  "To estimate catering costs, consider the number of guests, type of menu (buffet, plated), and any dietary restrictions. You can request quotes from multiple caterers to compare prices.",
+  "Research rental companies in your area and request quotes based on your specific needs, such as microphones, projectors, and screens. Factor in delivery, setup, and any additional fees when budgeting.",
+  "Consider DIY decorations using inexpensive materials like paper, fabric, or balloons. You can also repurpose items you already own or borrow decorations from friends or family to cut costs.",
+  "Explore local talent such as musicians, dancers, or comedians who may offer affordable rates for performances. You can also create your own playlist and use a sound system for background music.",
+  "Research average prices for the services you need and be prepared to negotiate based on your budget and specific requirements. Consider bundling services or asking for discounts for early payment to lower costs.",
+  "Don't forget to budget for items like insurance, permits, taxes, and gratuities, which can often be overlooked but add up quickly. It's also wise to set aside a contingency fund for any unforeseen circumstances."
+  ]
+  
+        },
+        {
+          "tag": "plan_event",
+          "patterns": [
+            "I want to plan an event",
+            "I'm thinking of organizing an event",
+            "How can I plan an event?",
+            "I need help with event planning",
+            "Can you assist me in organizing an event?"
+          ],
+          "responses": [
+            "Of course! I'd be happy to help you plan your event. What type of event are you thinking of? (e.g., birthday, wedding, corporate event)"
+          ]
+        },
+        {
+          "tag": "event_type",
+          "patterns": [
+            "I'm planning a birthday party",
+            "I want to organize a wedding",
+            "I'm thinking of a corporate event",
+            "I'm considering a graduation party",
+            "I need help with my anniversary celebration"
+          ],
+          "responses": [
+            "Great choice! Each type of event has its unique requirements. What specific details would you like to discuss for your [event_type]?"
+          ]
+        },
+        {
+          "tag": "event_details",
+          "patterns": [
+            "I need help with venue selection",
+            "What are some venue options?",
+            "Do you have suggestions for catering services?",
+            "I'm looking for entertainment ideas",
+            "Can you recommend a photographer?"
+          ],
+          "responses": [
+            "Sure, we can discuss venue options, catering services, entertainment ideas, photography, and more. What aspect of your event would you like to focus on first?"
+          ]
+        },
+        {
+          "tag": "event_budget",
+          "patterns": [
+            "What's the budget for the event?",
+            "How much should I budget for a [event_type]?",
+            "Do you have any budgeting tips for event planning?",
+            "Can you help me create a budget for my event?"
+          ],
+          "responses": [
+            "Setting a budget is essential for successful event planning. Let's discuss your budget and explore cost-effective options for your [event_type]."
+          ]
+        },
+        {
+          "tag": "event_theme",
+          "patterns": [
+            "Do you have any theme ideas for a [event_type]?",
+            "What are some popular themes for [event_type]?",
+            "I'm looking for theme inspiration for my event"
+          ],
+          "responses": [
+            "Themes add a unique touch to your event. Let's explore some creative theme ideas for your [event_type]!"
+          ]
+        },
+        {
+          "tag": "event_logistics",
+          "patterns": [
+            "How do I handle event logistics?",
+            "What are the key logistics to consider for a [event_type]?",
+            "Can you provide a checklist for event planning logistics?"
+          ],
+          "responses": [
+            "Event logistics involve many details. Let's discuss key considerations and create a checklist to ensure everything runs smoothly for your [event_type]."
+          ]
+        },
+        {
+          "tag": "event_marketing",
+          "patterns": [
+            "How can I market my event?",
+            "Do you have tips for promoting a [event_type]?",
+            "Can you suggest marketing strategies for event promotion?"
+          ],
+          "responses": [
+            "Promoting your event effectively is crucial. Let's explore marketing strategies tailored to your [event_type] audience."
+          ]
+        },
+        {
+          "tag": "event_support",
+          "patterns": [
+            "Do you provide event planning support services?",
+            "Can I get assistance with event logistics?",
+            "I need help with on-site coordination for my event"
+          ],
+          "responses": [
+            "Yes, we offer event planning support services to ensure your event is a success. Let's discuss how we can assist you further."
+          ]
+        },
+        {
+          "tag": "event_feedback",
+          "patterns": [
+            "How can I collect feedback after the event?",
+            "What's the best way to gather post-event feedback?",
+            "Do you have a feedback form template for events?"
+          ],
+          "responses": [
+            "Collecting feedback helps improve future events. Let's explore effective methods for gathering feedback and analyze the results."
+          ]
+        },
+        {
+          "tag": "event_conclusion",
+          "patterns": [
+            "Thank you for your assistance",
+            "I have all the information I need now",
+            "You've been very helpful, thanks!"
+          ],
+          "responses": [
+            "You're welcome! If you have any more questions or need further assistance, feel free to ask. Best of luck with your event planning!"
+          ]
+        },
+        {
+          "tag": "plan_event",
+          "patterns": [
+            "I want to plan an event",
+            "I'm thinking of organizing an event",
+            "How can I plan an event?",
+            "I need help with event planning",
+            "Can you assist me in organizing an event?"
+          ],
+          "responses": [
+            "Of course! I'd be happy to help you plan your event. What type of event are you thinking of? (e.g., birthday, wedding, corporate event)"
+          ]
+        },
+        {
+          "tag": "event_type",
+          "patterns": [
+            "birthday party",
+            "I'm planning a birthday party"
+          ],
+          "responses": [
+            "Great choice! Each type of event has its unique requirements. What specific details do you need help with for your birthday party?"
+          ]
+        },
+        {
+          "tag": "event_budget",
+          "patterns": [
+            "What is the budget for above in Kenya shillings?",
+            "How much should I budget for a birthday party in Kenya?"
+          ],
+          "responses": [
+            "The budget for a birthday party in Kenya can vary depending on factors such as the number of guests, the venue, the theme, and the level of customization. However, I can provide a rough estimate based on common expenses: \n\n1. Venue Rental: This can range from 5,000 KES to 50,000 KES or more, depending on the location, size, and amenities of the venue. \n2. Decorations: Budget around 5,000 KES to 20,000 KES for decorations, including balloons, banners, tablecloths, and themed props. \n3. Food and Drinks: Estimate 1,000 KES to 3,000 KES per person for catering, depending on the menu and whether you're hiring a caterer or preparing the food yourself. \n4. Entertainment: If you're hiring entertainment such as a DJ, magician, or live band, budget around 10,000 KES to 50,000 KES or more, depending on the performer's fees. \n5. Cake: A custom birthday cake can cost anywhere from 3,000 KES to 20,000 KES or more, depending on the size, design, and complexity. \n6. Party Favors: Budget around 500 KES to 2,000 KES per person for party favors, such as small gifts or personalized souvenirs. \n7. Miscellaneous Expenses: Don't forget to budget for other miscellaneous expenses such as invitations, transportation, and any additional services or rentals you may need. \n\nOverall, you can expect to spend anywhere from 20,000 KES to 200,000 KES or more for a birthday party in Kenya, depending on your preferences and requirements. It's essential to plan your budget carefully and prioritize your spending based on what's most important to you for the event."
+          ]
+        },
+        {
+          "tag": "event_venues",
+          "patterns": [
+            "What are the best venues for the party?",
+            "Where can I host a birthday party in Kenya?"
+          ],
+          "responses": [
+            "In Kenya, there are many great venues suitable for hosting birthday parties. Here are some options to consider: \n\n1. Hotel Banquet Halls: Many hotels in Kenya offer banquet halls or event spaces that are well-equipped for hosting parties. They often provide catering services and may offer packages that include decorations and entertainment. \n2. Restaurants and Cafés: Restaurants with private dining rooms or outdoor spaces can be excellent venues for birthday parties. Consider popular restaurants in your area that offer a festive atmosphere and delicious food. \n3. Event Venues: Look for dedicated event venues such as event halls, community centers, or party venues. These spaces are designed specifically for hosting events and may offer customizable packages to suit your needs. \n4. Parks and Gardens: If you prefer an outdoor party, parks and gardens can provide a beautiful and spacious setting. Many parks in Kenya have picnic areas, gazebos, or designated event spaces available for rent. \n5. Private Residences: Hosting the party at a private residence, such as your home or a friend's house, can be a cost-effective option. You have more flexibility in terms of decorations, entertainment, and catering choices. \n6. Resorts and Country Clubs: If you're looking for a more upscale venue, resorts and country clubs often have beautiful facilities with amenities like swimming pools, gardens, and sports facilities. \n7. Event Spaces in Shopping Malls: Some shopping malls in Kenya have event spaces or party rooms available for rent. These venues are convenient and may offer amenities like parking, security, and access to nearby shops and restaurants. \n\nWhen choosing a venue, consider factors such as location, capacity, facilities, and budget. It's also essential to book the venue well in advance to ensure availability on your desired date. Additionally, visit the venue in person to see if it meets your requirements and to discuss any specific arrangements with the venue staff."
+          ]
+        },
+        {
+          "tag": "plan_event",
+          "patterns": [
+            "I want to plan an event",
+            "I'm thinking of organizing an event",
+            "How can I plan an event?",
+            "I need help with event planning",
+            "Can you assist me in organizing an event?"
+          ],
+          "responses": [
+            "Of course! I'd be happy to help you plan your event. What type of event are you thinking of? (e.g., birthday, wedding, graduation, corporate event)"
+          ]
+        },
+        {
+          "tag": "event_type",
+          "patterns": [
+            "wedding",
+            "I'm planning a wedding",
+            "graduation ceremony",
+            "I need help planning a graduation event"
+          ],
+          "responses": [
+            "Great choice! Each type of event has its unique requirements. What specific details do you need help with for your wedding or graduation ceremony?"
+          ]
+        },
+        {
+          "tag": "event_budget",
+          "patterns": [
+            "What is the budget for above in Kenya shillings?",
+            "How much should I budget for a wedding in Kenya?",
+            "What is the typical budget for a graduation ceremony in Kenya?"
+          ],
+          "responses": [
+            "The budget for a wedding or graduation ceremony in Kenya can vary depending on factors such as the number of guests, the venue, the theme, and the level of customization. However, I can provide a rough estimate based on common expenses..."
+          ]
+        },
+        {
+          "tag": "event_venues",
+          "patterns": [
+            "What are the best venues for the event?",
+            "Where can I host a wedding in Kenya?",
+            "Where can I host a graduation ceremony in Kenya?"
+          ],
+          "responses": [
+            "In Kenya, there are many great venues suitable for hosting weddings and graduation ceremonies. Here are some options to consider: \n\n1. Hotel Banquet Halls: Many hotels in Kenya offer banquet halls or event spaces that are well-equipped for hosting weddings and graduation ceremonies. They often provide catering services and may offer packages that include decorations and entertainment. \n2. Outdoor Venues: Consider outdoor venues such as gardens, parks, or beachfront locations for a picturesque wedding or graduation ceremony. These venues provide a beautiful backdrop and ample space for guests to enjoy the event. \n3. Event Venues: Look for dedicated event venues such as event halls, community centers, or party venues. These spaces are designed specifically for hosting events and may offer customizable packages to suit your needs. \n4. Resorts and Country Clubs: If you're looking for a more upscale venue, resorts and country clubs often have beautiful facilities with amenities like gardens, pools, and scenic views. \n5. Educational Institutions: For graduation ceremonies, consider hosting the event at a school, college, or university campus. These venues often have auditoriums or halls available for rent and provide a fitting setting for academic celebrations. \n\nWhen choosing a venue, consider factors such as location, capacity, facilities, and budget. It's also essential to book the venue well in advance to ensure availability on your desired date. Additionally, visit the venue in person to see if it meets your requirements and to discuss any specific arrangements with the venue staff."
+          ]
+        },
+        {
+          "tag": "ticketing_process",
+          "patterns": [
+            "Hey, I need some help with creating and purchasing tickets for an event. Can you guide me through the process?"
+          ],
+          "responses": [
+            "Absolutely! I'd love to help you with creating and purchasing tickets for your event. Could you let me know what kind of event it is and where you're planning to sell the tickets?"
+          ]
+        },
+        {
+          "tag": "event_type_and_ticket_sales",
+          "patterns": [
+            "It's a concert that I'm organizing at a local venue. I want to sell the tickets online."
+          ],
+          "responses": [
+            "That's awesome! To sell tickets online, you can consider using popular ticketing platforms like Eventbrite, Ticketmaster, or even creating a dedicated event page on social media platforms like Facebook. These platforms provide tools to create and manage your event, set ticket prices, and handle ticket sales."
+          ]
+        },
+        {
+          "tag": "ticket_design",
+          "patterns": [
+            "What about creating the actual tickets? Do I need to design them myself?"
+          ],
+          "responses": [
+            "When you use a ticketing platform, they usually provide templates for ticket designs that you can customize with your event details, logo, and branding. You won't have to design them from scratch. Just follow the instructions provided by the ticketing platform to personalize the tickets for your event."
+          ]
+        },
+        {
+          "tag": "ticket_purchase_process",
+          "patterns": [
+            "How do people purchase the tickets once I've set them up?"
+          ],
+          "responses": [
+            "Once you've set up your event and tickets on the ticketing platform, people can purchase the tickets online through the platform's website or app. They usually have a simple process where users can select the number of tickets they want, provide their payment information, and receive the tickets via email or as a digital download."
+          ]
+        },
+        {
+          "tag": "ticket_sales_promotion",
+          "patterns": [
+            "Is there anything else I should know about ticket sales?"
+          ],
+          "responses": [
+            "One important aspect is promoting your event and ticket sales. Make sure to share the ticketing link or event page on your social media platforms, website, and any other relevant channels to reach a wider audience. You can also consider partnering with local influencers or running targeted ads to boost ticket sales."
+          ]
+        },
+        {
+          "tag": "thanks",
+          "patterns": [
+            "That's helpful advice! I'll start looking into ticketing platforms and promoting the event. Thanks for your assistance!"
+          ],
+          "responses": [
+            "You're very welcome! I'm glad I could assist you. If you have any more questions or need further guidance along the way, feel free to ask. Good luck with your event and ticket sales!"
+          ]
+        },
+        
+            {
+              "tag": "product_launch_planning",
+              "patterns": [
+                "Hey, I need some help with planning a new product launch event. Can you guide me through the process and let me know what things I'll need and what type of people I should invite?"
+              ],
+              "responses": [
+                "Absolutely! Planning a new product launch event can be exciting. First, let's talk about the things you'll need. Some essentials include a venue, audiovisual equipment, decorations, catering, and promotional materials like banners or brochures. You might also want to consider having product samples or prototypes on display."
+              ]
+            },
+            {
+              "tag": "event_theme_ideas",
+              "patterns": [
+                "Now, what about the theme for the event? Any ideas?"
+              ],
+              "responses": [
+                "Choosing a theme can add excitement and make your product launch event more memorable. You could align the theme with the product itself or go for something that reflects your brand's identity. For example, if you're launching a new fitness gadget, a health and wellness theme could be fitting. Get creative and think about what will resonate with your target audience."
+              ]
+            },
+            {
+              "tag": "guest_list_decision",
+              "patterns": [
+                "Now, how do I decide who to invite to the event?"
+              ],
+              "responses": [
+                "When determining your guest list, consider inviting key stakeholders such as industry influencers, potential customers, business partners, and members of the media. You want to invite people who can help create buzz around your new product and potentially generate positive word-of-mouth. Make sure to also invite your existing customers and loyal supporters to show appreciation for their support."
+              ]
+            },
+            {
+              "tag": "invitation_choice",
+              "patterns": [
+                "Should I send out physical invitations or use digital ones?"
+              ],
+              "responses": [
+                "It depends on your preference and budget. Physical invitations can add a personal touch, but they can also be more time-consuming and costly. Digital invitations, sent via email or through event management platforms, are convenient and can easily track RSVPs. You could even consider a combination of both, sending physical invitations to VIP guests and digital invitations to others."
+              ]
+            },
+            {
+              "tag": "event_management",
+              "patterns": [
+                "How can I make sure the event runs smoothly?"
+              ],
+              "responses": [
+                "To ensure a smooth event, create a detailed timeline and checklist. Coordinate with your venue and vendors to ensure they have all the necessary information and requirements. Consider having a run-through or rehearsal before the event to iron out any potential issues. Having a dedicated event coordinator or team can also help manage the logistics on the day of the launch."
+              ]
+            },
+            {
+              "tag": "thanks_and_promotion",
+              "patterns": [
+                "That's helpful advice! I'll start planning and invite the right people. Thanks for your assistance!"
+              ],
+              "responses": [
+                "You're welcome! I'm glad I could assist you. If you have any more questions or need further guidance during the planning process, feel free to reach out."
+              ]
+            },
+            {
+              "tag": "event_promotion_ideas",
+              "patterns": [
+                "What are some creative ways to promote the event?"
+              ],
+              "responses": [
+                "Great question! There are plenty of creative ways to promote your event. Here are a few ideas: \n\n1. Social media buzz: Create engaging posts about your event on platforms like Instagram, Facebook, and Twitter. Use eye-catching visuals, teaser videos, and event hashtags to generate excitement and encourage people to share. \n2. Influencer partnerships: Collaborate with influencers or industry experts who align with your brand and product. They can help spread the word about your event to their followers and bring in more attendees. \n3. Exclusive sneak peeks: Offer a sneak peek of your new product or event highlights to a select group of people, such as loyal customers or media representatives. This exclusivity can create anticipation and generate buzz. \n4. Contests and giveaways: Organize contests or giveaways on social media where participants can win tickets to the event or exclusive merchandise related to your product. This can help generate excitement and reach a wider audience. \n5. Collaborative content: Partner with other brands or organizations that have a similar target audience. Create collaborative content, such as blog posts, videos, or podcasts, to promote your event to their followers and vice versa. \n\nRemember, creativity is key when it comes to promoting your event. Think outside the box and find unique ways to engage your audience and make them excited about attending."
+              ]
+            },
+            {
+              "tag": "budgeting_advice",
+              "patterns": [
+                "I need a little advice on budgeting for events"
+              ],
+              "responses": [
+                "Ah, budgeting for events can be tricky, but I've got you covered! Here's a conversation flow to help you plan your budget based on event size:"
+              ]
+            },
+            {
+              "tag": "small_event_budget",
+              "patterns": [
+                "How do I start budgeting for a small event?"
+              ],
+              "responses": [
+                "First, determine your overall budget. Then, break it down into categories like venue, food and drinks, decorations, entertainment, and marketing. Allocate a portion of your budget to each category based on priority."
+              ]
+            },
+            {
+              "tag": "medium_event_budget",
+              "patterns": [
+                "What about medium-sized events?"
+              ],
+              "responses": [
+                "For medium-sized events, you'll want to allocate a larger portion of your budget to the venue, as it can have a bigger impact. Consider more elaborate decorations, additional entertainment options, and a slightly larger marketing budget to reach a wider audience."
+              ]
+            },
+            {
+              "tag": "large_event_budget",
+              "patterns": [
+                "And for large events?"
+              ],
+              "responses": [
+                "Large events require careful budgeting. Allocate a significant portion of your budget to the venue, as well as food and drinks. Consider hiring professional event planners and invest in high-quality entertainment to create a memorable experience. Marketing and promotional efforts should be robust to attract a large audience."
+              ]
+            },
+            {
+              "tag": "general_budgeting_tips",
+              "patterns": [
+                "Any general tips for budgeting?"
+              ],
+              "responses": [
+                "Absolutely! Always leave some room in your budget for unexpected expenses. Research and compare prices for vendors and services to get the best deals. Consider alternative options like DIY decorations or using local talent for entertainment to save money. And don't forget to track your expenses throughout the planning process."
+              ]
+            },
+            {
+              "tag": "traditional_wedding_theme",
+              "patterns": [
+                "I am planning for a traditional wedding and I need assistance on deciding about a unique theme. Please give some ideas"
+              ],
+              "responses": [
+                "If you're looking for traditional wedding themes, there are several elements you can incorporate into your event to create a timeless and elegant atmosphere. Here are some ideas:\n\n1. Classic Color Palette: Opt for a classic color palette like white, ivory, and gold. These colors exude sophistication and create a timeless look.\n\n2. Romantic Lighting: Use soft, ambient lighting to create a romantic ambiance. Candles, fairy lights, and chandeliers can add a touch of elegance to your venue.\n\n3. Traditional Floral Arrangements: Choose traditional flowers like roses, peonies, or lilies for your floral arrangements. These blooms are timeless and symbolize love and beauty.\n\n4. Elegant Table Settings: Set your tables with fine china, crystal glassware, and polished silverware. Incorporate classic elements like lace table runners or embroidered napkins for an extra touch of elegance.\n\n5. Formal Attire: Encourage your guests to dress in formal attire to match the traditional theme. For the wedding party, consider classic silhouettes and fabrics for the bridal gown and groom's suit.\n\n6. Live Music: Hire a live band or string quartet to provide beautiful music during the ceremony and reception. Traditional wedding songs and romantic ballads can set the mood perfectly.\n\nRemember, the key to a traditional wedding theme is to embrace timeless elements that have stood the test of time. Incorporating these ideas will help create a sophisticated and memorable event."
+              ]
+            },
+            {
+              "tag": "white_gold_theme_ideas",
+              "patterns": [
+                "Hey, I'm planning an event with a white and gold theme. Can you help me with some ideas?"
+              ],
+              "responses": [
+                "Absolutely! I'd be thrilled to help you plan your white and gold event. What kind of event is it?"
+              ]
+            },
+            {
+              "tag": "birthday_party_decorations",
+              "patterns": [
+                "That's a great idea! I want to make sure the guests feel the theme throughout the event. Any suggestions for the dress code?"
+              ],
+              "responses": [
+                "For a glamorous touch, you could suggest that guests dress in white and gold attire. It'll add to the overall ambiance and make everyone feel like they're part of the theme."
+              ]
+            },
+            {
+              "tag": "birthday_party_activities",
+              "patterns": [
+                "Perfect! I also want to have some fun activities during the party. Any recommendations?"
+              ],
+              "responses": [
+                "How about a DIY cocktail station where guests can create their own white and gold-themed drinks? You could also have a dance floor with a DJ playing all the latest hits to keep the party going."
+              ]
+            },
+            {
+              "tag": "birthday_party_menu",
+              "patterns": [
+                "Now, I need help with the menu. What kind of food and drinks should I serve?"
+              ],
+              "responses": [
+                "For food, you could have a mix of elegant appetizers like mini quiches and shrimp cocktail. As for drinks, you can offer a signature white and gold cocktail, champagne, and a selection of white and red wines."
+              ]
+            },
+            {
+              "tag": "birthday_party_favors",
+              "patterns": [
+                "Lastly, any suggestions for party favors that go with the theme?"
+              ],
+              "responses": [
+                "How about personalized white and gold keychains or mini bottles of gold glitter nail polish? They'll make for great keepsakes and tie in perfectly with the theme."
+              ]
+            },
+            {
+              "tag": "unique_event_themes",
+              "patterns": [
+                "What are some other unique event themes?"
+              ],
+              "responses": [
+                "Sure thing! Here are a few more unique event themes for you to consider: 1. Enchanted Forest: Transform your venue into a magical woodland with lush greenery, twinkling lights, and whimsical decor. Think fairies, woodland creatures, and a touch of fantasy. 2. Retro Arcade: Take your guests back in time with a retro arcade-themed event. Set up vintage arcade games, neon lights, and nostalgic decorations for a fun and nostalgic atmosphere. 3. Masquerade Ball: Create an air of mystery and elegance with a masquerade ball theme. Encourage guests to wear masks and dress in their finest attire for a night of intrigue and glamour. 4. Around the World: Celebrate the diversity of cultures by creating an 'Around the World' event. Each area of the venue can represent a different country, showcasing its unique traditions, cuisine, and music. 5. Galaxy Gala: Set your event in outer space with a galaxy-themed gala. Use cosmic decorations, glow-in-the-dark elements, and celestial projections to create an otherworldly atmosphere. Remember, the key to a unique event theme is to think creatively and make it an immersive experience for your guests. Have fun planning your next extraordinary event!"
+              ]
+            },
+            {
+              "tag": "graduation_theme_ideas",
+              "patterns": [
+                "What about themes used for a graduation ceremony?"
+              ],
+              "responses": [
+                "Graduation ceremonies often have a classic and formal feel, but you can still add a touch of creativity to make it memorable. Here are a few graduation ceremony theme ideas: 1. 'Adventure Awaits': Inspire graduates to embark on their next journey with a theme centered around adventure. Decorate the venue with travel-inspired elements like globes, maps, and suitcases. 2. 'Hollywood Stars': Roll out the red carpet and give your graduates the star treatment with a Hollywood-themed graduation. Use a paparazzi backdrop, a 'Walk of Fame' with personalized stars, and even a mini awards ceremony. 3. 'Futuristic Achievers': Embrace the future by creating a futuristic-themed graduation. Incorporate sleek, modern decor, LED lights, and technology-inspired elements to symbolize the graduates' potential. 4. 'Garden of Success': Celebrate growth and achievement with a garden-themed graduation. Use floral decorations, greenery, and vibrant colors to create a fresh and uplifting atmosphere. 5. 'School of Magic': Add a touch of enchantment to the graduation ceremony with a magical theme. Incorporate elements from popular fantasy stories, like floating candles, wizard hats, and a sorting ceremony. Remember, the theme should complement the significance of the graduation ceremony while reflecting the personality and aspirations of the graduates. Congrats to all the graduates!"
+              ]
+            }
+          ]
+        }
